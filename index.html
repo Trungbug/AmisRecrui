@@ -4,9 +4,11 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>AMIS Tuyển dụng</title>
+    <link rel="stylesheet" href="assets/css/filter.css" />
     <link rel="stylesheet" href="assets/css/common.css" />
     <link rel="stylesheet" href="assets/css/style.css" />
     <link rel="stylesheet" href="assets/css/icon.css" />
+    <link rel="stylesheet" href="assets/css/avatar.css" />
 
     <link
       rel="stylesheet"
@@ -21,14 +23,13 @@
       >
         <!-- left -->
         <div class="header-left d-flex align-items-center">
+          <div class=" icon-switch-app"></div>
           <div class="icon icon-logo"></div>
           <div class="title-name">TUYỂN DỤNG</div>
-          <div class="navbar-search">
-            <input
-              type="text"
-              placeholder="Tìm kiếm tin tuyển dụng, ứng viên, nhân tài..."
-            />
-          </div>
+          <div class="search-box">
+                <input type="text" placeholder="Tìm kiếm nhanh trong danh sách" />
+                <i class="fas fa-search"></i>
+              </div>
         </div>
         <!-- right -->
         <div class="header-right d-flex align-items-center">
@@ -37,14 +38,20 @@
             <span>Website tuyển dụng</span>
           </div>
           <div class="icon icon-cart"></div>
+          <div class="apui-user-controlpanel-item"></div>
           <div class="icon icon-chat"></div>
           <div class="icon icon-notification"></div>
           <div class="icon icon-user"></div>
+          <div class="misa-helpmenu-trigger"></div>
         </div>
       </div>
       <!-- sidebar -->
       <div class="content w-100 d-flex flex1">
         <div class="sidebar h-100">
+          <div class="sidebar-item ">
+            <div  class="fa-sharp fa-light fa-bars"></div>
+            <div class="title">Tin tuyển dụng</div>
+          </div>
           <div class="sidebar-item active">
             <div class="icon icon-candidate"></div>
             <div class="title">Ứng viên</div>
@@ -69,6 +76,10 @@
             <div class="icon-recruitment-campaign-active"></div>
             <div class="title">Công việc</div>
           </div>
+          <div class="sidebar-item">
+            <div class="icon-email-ai-marketing"></div>
+            <div class="title">aiMarketing</div>
+          </div>
 
           <div class="bottom-area">
             <div
@@ -92,41 +103,178 @@
             </button>
           </div>
 
-          <div
-            class="table-toolbar d-flex justify-content-flex-end align-items-center"
-          ></div>
+          <div class="table-toolbar d-flex justify-content-space-between align-items-center">
+            <div class="toolbar-left d-flex align-items-center justify-content-flex-end">
+              
+              <div class="filter-btn">
+                <i class="fas fa-filter"></i>
+              </div>
+              <div class="refresh-btn">
+                <i class="fas fa-sync-alt"></i>
+              </div>
+            </div>
+            <div class="toolbar-right d-flex align-items-center">
+              <div class="export-btn">
+                <i class="fas fa-download"></i>
+              </div>
+              <div class="settings-btn">
+                <i class="fas fa-cog"></i>
+              </div>
+            </div>
+            <div class="search-box">
+                <input type="text" placeholder="Tìm kiếm nhanh trong danh sách" />
+                <i class="fas fa-search"></i>
+              </div>
+          </div>
 
           <div class="table-scoll-wrapper">
             <div class="table-container">
               <table class="candidate-table">
                 <thead>
                   <tr>
-                    <th><input type="checkbox" /></th>
+                    <th class="sticky-left checkbox-column"><input type="checkbox" /></th>
                     <th>Họ và tên</th>
                     <th>Số điện thoại</th>
                     <th>Email</th>
                     <th>Chiến dịch tuyển dụng</th>
-                    <th>Vị trí tuyển dụng</th>
-                    <th>Tin tuyển dụng</th>
-                    <th>Vòng tuyển dụng</th>
-                    <th>Đánh giá</th>
-                    <th>Trình độ đào tạo</th>
-                    <th>Nơi làm việc gần nhất</th>
-                    <th>Người thu hút nhân sự</th>
-                    <th>Ngày ứng tuyển</th>
-                    <th>Người giới thiệu</th>
-                    <th>Kênh tuyển dụng</th>
-                    <th class="text-center">Thao tác</th>
+                    <th>Nơi làm việc gần đây</th>
+                    <th>Nơi làm việc</th>
+                    <th>Thời gian</th>
+                    <th>Vị trí công việc</th>
+                    <th>Mô tả công việc</th>
+                    <th class="sticky-right action-column"></th>
                   </tr>
                 </thead>
-                <tbody id="candidateTableBody"></tbody>
+                <tbody id="candidateTableBody">
+                  <tr>
+                    <td><input type="checkbox" /></td>
+                    <td>
+                      <div class="d-flex align-items-center">
+                        <div class="user-avatar-group">
+                          <div class="avatar bg-danger">TK</div>
+                          <div class="social-icons">
+                            <i class="fab fa-facebook-f"></i>
+                          </div>
+                        </div>
+                        <div>
+                          Tạ Long Khánh
+                          <div class="sub-text">Nhân viên</div>
+                        </div>
+                      </div>
+                    </td>
+                    <td>--</td>
+                    <td>trangthu.tester@gmail.com</td>
+                    <td>--</td>
+                    <td>QC /Tester/Kiểm thử</td>
+                  </tr>
+                  <tr>
+                    <td><input type="checkbox" /></td>
+                    <td>
+                      <div class="d-flex align-items-center">
+                        <div class="avatar">LH</div>
+                        <div>Lê Mạnh Hùng</div>
+                      </div>
+                    </td>
+                    <td>--</td>
+                    <td>--</td>
+                    <td>--</td>
+                    <td>--</td>
+                  </tr>
+                  <tr>
+                    <td><input type="checkbox" /></td>
+                    <td>
+                      <div class="d-flex align-items-center">
+                        <div class="avatar">LH</div>
+                        <div>Lê Mạnh Hùng</div>
+                      </div>
+                    </td>
+                    <td>--</td>
+                    <td>--</td>
+                    <td>--</td>
+                    <td>--</td>
+                  </tr>
+                  <tr>
+                    <td><input type="checkbox" /></td>
+                    <td>
+                      <div class="d-flex align-items-center">
+                        <div class="user-avatar-group">
+                          <div class="avatar bg-danger">TK</div>
+                          <div class="social-icons">
+                            <i class="fab fa-facebook-f"></i>
+                          </div>
+                        </div>
+                        <div>
+                          Tạ Long Khánh
+                          <div class="sub-text">Nhân viên</div>
+                        </div>
+                      </div>
+                    </td>
+                    <td>--</td>
+                    <td>trangthu.tester@gmail.com</td>
+                    <td>--</td>
+                    <td>QC /Tester/Kiểm thử</td>
+                  </tr>
+                  <tr>
+                    <td><input type="checkbox" /></td>
+                    <td>
+                      <div class="d-flex align-items-center">
+                        <div class="avatar">LL</div>
+                        <div>
+                          Lại Cẩm Linh
+                          <div class="sub-text">Nhân viên</div>
+                        </div>
+                      </div>
+                    </td>
+                    <td>0982 970 918</td>
+                    <td>camlinh.lai27@gmail.com</td>
+                    <td>--</td>
+                    <td>QC /Tester/Kiểm thử</td>
+                  </tr>
+                  <tr>
+                    <td><input type="checkbox" /></td>
+                    <td>
+                      <div class="d-flex align-items-center">
+                        <div class="avatar">BU</div>
+                        <div>Bùi Mỹ Uyên</div>
+                      </div>
+                    </td>
+                    <td>0331 256 963</td>
+                    <td>uyenbt.work@gmail.com</td>
+                    <td>--</td>
+                    <td>Nhân viên kinh doanh</td>
+                  </tr>
+                </tbody>
               </table>
+            </div>
+          </div>
+          
+          <div class="table-footer d-flex justify-content-space-between align-items-center">
+            <div class="total-records">
+              Tổng số: <b>5363</b> bản ghi
+            </div>
+            <div class="pagination d-flex align-items-center">
+              <div class="records-per-page d-flex align-items-center">
+                <span>Số bản ghi/trang:</span>
+                <select>
+                  <option>15</option>
+                  <option>25</option>
+                  <option>50</option>
+                  <option>100</option>
+                </select>
+              </div>
+              <div class="page-numbers">
+                <span>1-15 bản ghi</span>
+              </div>
+              <div class="page-controls">
+                <button class="prev-page"><i class="fas fa-chevron-left"></i></button>
+                <button class="next-page"><i class="fas fa-chevron-right"></i></button>
+              </div>
             </div>
           </div>
         </div>
       </div>
       <!-- popup modal -->
-      <div class="modal-overlay" id="modalOverlay">
+      <div class="modal-overlay active" id="modalOverlay">
         <div class="modal">
           <div class="modal-header">
             <h3 id="modalTitle">Thêm ứng viên</h3>
@@ -135,7 +283,9 @@
           <div class="modal-body">
             <form id="candidateForm">
               <input type="hidden" id="candidateId" />
-              <div class="form-row">
+
+              <div class="form-row align-items-center">
+              
                 <div class="form-group" style="flex: 1">
                   <label>Họ và tên <span class="required">*</span></label>
                   <input
@@ -146,6 +296,34 @@
                   />
                 </div>
               </div>
+
+              <div class="form-row">
+                <div class="form-group">
+                  <label>Ngày sinh</label>
+                  <input
+                    type="text"
+                    id="dob"
+                    placeholder="dd/MM/yyyy"
+                  />
+                </div>
+                <div class="form-group">
+                  <label>Giới tính</label>
+                  <select id="gender">
+                    <option value="">Chọn giới tính</option>
+                    <option value="male">Nam</option>
+                    <option value="female">Nữ</option>
+                    <option value="other">Khác</option>
+                  </select>
+                </div>
+              </div>
+              
+              <div class="form-group">
+                <label>Khu vực</label>
+                <select id="area">
+                    <option value="">Chọn giá trị</option>
+                </select>
+              </div>
+
               <div class="form-row">
                 <div class="form-group">
                   <label>Số điện thoại</label>
@@ -160,14 +338,64 @@
                   <input type="email" id="email" placeholder="Nhập Email" />
                 </div>
               </div>
+
               <div class="form-group">
-                <label>Vị trí ứng tuyển</label>
+                <label>Địa chỉ</label>
                 <input
                   type="text"
-                  id="position"
-                  placeholder="Nhập vị trí ứng tuyển"
+                  id="address"
+                  placeholder="Nhập địa chỉ"
                 />
               </div>
+
+              <div class="form-section">
+                <div class="form-section-title">HỌC VẤN</div>
+                <div class="input-group">
+                  <label>Trình độ đào tạo</label>
+                  <div class="d-flex align-items-center">
+                     <input type="text" placeholder="Nhập trình độ đào tạo" />
+                     <button type="button" class="add-item-btn">+</button>
+                  </div>
+                </div>
+                 <div class="input-group">
+                  <label>Nơi đào tạo</label>
+                  <div class="d-flex align-items-center">
+                     <input type="text" placeholder="Nhập nơi đào tạo" />
+                     <button type="button" class="add-item-btn">+</button>
+                  </div>
+                </div>
+              </div>
+
+              <div class="form-section">
+                <div class="form-section-title">KINH NGHIỆM LÀM VIỆC</div>
+                <div class="form-group">
+                    <label>Nơi làm việc gần đây</label>
+                    <input type="text" placeholder="Nhập nơi làm việc gần đây" />
+                </div>
+                <div class="form-group">
+                    <label>Nơi làm việc</label>
+                    <input type="text" placeholder="Nhập nơi làm việc" />
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label>Thời gian</label>
+                        <input type="text" placeholder="MM/yyyy" />
+                    </div>
+                     <div class="form-group">
+                        <label>&nbsp;</label>
+                        <input type="text" placeholder="MM/yyyy" />
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label>Vị trí công việc</label>
+                    <input type="text" placeholder="Nhập vị trí công việc" />
+                </div>
+                 <div class="form-group">
+                    <label>Mô tả công việc</label>
+                    <textarea rows="3" placeholder="Nhập mô tả công việc"></textarea>
+                </div>
+              </div>
+
             </form>
           </div>
           <div class="modal-footer">
@@ -176,7 +404,6 @@
           </div>
         </div>
       </div>
-    </div>
 
     <div id="toast"></div>
   </body>

@@ -35,3 +35,13 @@
 .dis-flex {
   display: flex;
 }
+.field-row-input {
+    height: 32px !important;
+    line-height: 32px !important;
+    padding: 0 16px;
+    padding-top: 2px;
+    font-size: 14px !important;
+}
+.m-row{
+  margin: 8px 0 !important;
+}

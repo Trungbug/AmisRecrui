@@ -30,11 +30,45 @@ document.addEventListener("DOMContentLoaded", () => {
             const candidateToEdit = getCandidateById(candidateId);
 
             if (candidateToEdit) {
+                // Bind dữ liệu cho tất cả các trường
                 document.getElementById("candidateId").value = candidateToEdit.id;
                 document.getElementById("fullName").value = candidateToEdit.fullName;
-                document.getElementById("phone").value = candidateToEdit.phone;
-                document.getElementById("email").value = candidateToEdit.email;
-                document.getElementById("position").value = candidateToEdit.position;
+                document.getElementById("dob").value = candidateToEdit.dob || "";
+                document.getElementById("gender").value = candidateToEdit.gender || "";
+                document.getElementById("area").value = candidateToEdit.area || "";
+                document.getElementById("phone").value = candidateToEdit.phone || "";
+                document.getElementById("email").value = candidateToEdit.email || "";
+                document.getElementById("address").value = candidateToEdit.address || "";
+                
+                // Bind thông tin học vấn nếu có
+                if (document.querySelector('input[placeholder="Nhập trình độ đào tạo"]')) {
+                    document.querySelector('input[placeholder="Nhập trình độ đào tạo"]').value = candidateToEdit.education || "";
+                }
+                if (document.querySelector('input[placeholder="Nhập nơi đào tạo"]')) {
+                    document.querySelector('input[placeholder="Nhập nơi đào tạo"]').value = candidateToEdit.educationPlace || "";
+                }
+                
+                // Bind thông tin kinh nghiệm làm việc
+                if (document.querySelector('input[placeholder="Nhập nơi làm việc gần đây"]')) {
+                    document.querySelector('input[placeholder="Nhập nơi làm việc gần đây"]').value = candidateToEdit.recentWorkplace || "";
+                }
+                if (document.querySelector('input[placeholder="Nhập nơi làm việc"]')) {
+                    document.querySelector('input[placeholder="Nhập nơi làm việc"]').value = candidateToEdit.workplace || "";
+                }
+                
+                // Bind thời gian làm việc
+                const timeInputs = document.querySelectorAll('input[placeholder="MM/yyyy"]');
+                if (timeInputs.length >= 2) {
+                    timeInputs[0].value = candidateToEdit.startTime || "";
+                    timeInputs[1].value = candidateToEdit.endTime || "";
+                }
+                
+                if (document.querySelector('input[placeholder="Nhập vị trí công việc"]')) {
+                    document.querySelector('input[placeholder="Nhập vị trí công việc"]').value = candidateToEdit.position || "";
+                }
+                if (document.querySelector('textarea[placeholder="Nhập mô tả công việc"]')) {
+                    document.querySelector('textarea[placeholder="Nhập mô tả công việc"]').value = candidateToEdit.jobDescription || "";
+                }
             }
         }
         elements.modal.classList.add("active");
@@ -65,9 +99,27 @@ document.addEventListener("DOMContentLoaded", () => {
 
         const formData = {
             fullName: fullName,
+            dob: document.getElementById("dob").value,
+            gender: document.getElementById("gender").value,
+            area: document.getElementById("area").value,
             phone: document.getElementById("phone").value,
             email: document.getElementById("email").value,
-            position: document.getElementById("position").value,
+            address: document.getElementById("address").value,
+            
+            // Thông tin học vấn
+            education: document.querySelector('input[placeholder="Nhập trình độ đào tạo"]')?.value,
+            educationPlace: document.querySelector('input[placeholder="Nhập nơi đào tạo"]')?.value,
+            
+            // Thông tin kinh nghiệm làm việc
+            recentWorkplace: document.querySelector('input[placeholder="Nhập nơi làm việc gần đây"]')?.value,
+            workplace: document.querySelector('input[placeholder="Nhập nơi làm việc"]')?.value,
+            
+            // Thời gian làm việc
+            startTime: document.querySelector('input[placeholder="MM/yyyy"]')?.value,
+            endTime: document.querySelectorAll('input[placeholder="MM/yyyy"]')[1]?.value,
+            
+            position: document.querySelector('input[placeholder="Nhập vị trí công việc"]')?.value,
+            jobDescription: document.querySelector('textarea[placeholder="Nhập mô tả công việc"]')?.value
         };
 
         if (saveCandidate(formData, currentEditId)) {

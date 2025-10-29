@@ -1,6 +1,18 @@
 import { showToast } from './commonFns.js';
 import { getCandidatesFromStorage, saveCandidatesToStorage } from './localStorageFns.js';
 
+// Tạo HTML cho social icons
+const getSocialIconsHTML = (networks = []) => {
+    const icons = {
+        facebook: 'fa-facebook-f',
+        discord: 'fa-discord',
+        line: 'fa-line'
+    };
+    return networks.map(network => 
+        `<i class="fab ${icons[network]}"></i>`
+    ).join('');
+};
+
 // Render bảng dữ liệu
 export const renderTable = (tableBody) => {
     const candidates = getCandidatesFromStorage();
@@ -16,22 +28,36 @@ export const renderTable = (tableBody) => {
     candidates.forEach((candidate) => {
         const tr = document.createElement("tr");
         tr.innerHTML = `
-            <td><input type="checkbox" /></td>
+            <td class="sticky-left checkbox-column"><input type="checkbox" /></td>
             <td>
-                <div class="user-info">
-                    <div class="name">${candidate.fullName}</div>
+                <div class="d-flex align-items-center">
+                    <div class="user-avatar-group">
+                        <div class="avatar bg-${candidate.avatarColor || 'info'}">${candidate.avatarInitials || '--'}</div>
+                        <div class="social-icons">
+                            ${getSocialIconsHTML(candidate.socialNetworks)}
+                        </div>
+                    </div>
+                    <div>
+                        ${candidate.fullName}
+                        ${candidate.role ? `<div class="sub-text">${candidate.role}</div>` : ''}
+                    </div>
                 </div>
             </td>
             <td>${candidate.phone || "--"}</td>
             <td>${candidate.email || "--"}</td>
+            <td>${candidate.campaign || "--"}</td>
+            <td>${candidate.recentWorkplace || "--"}</td>
+            <td>${candidate.workplace || "--"}</td>
+            <td>${candidate.startTime ? `${candidate.startTime} - ${candidate.endTime || 'Hiện tại'}` : "--"}</td>
             <td>${candidate.position || "--"}</td>
-            <td class="text-center">
+            <td>${candidate.jobDescription || "--"}</td>
+            <td class="sticky-right action-column">
                 <div class="action-buttons">
                     <button class="edit" data-id="${candidate.id}" title="Sửa">
-                        <i class="fa-solid fa-pencil"></i>
+                        <i class="fas fa-edit"></i>
                     </button>
                     <button class="delete" data-id="${candidate.id}" title="Xóa">
-                        <i class="fa-solid fa-trash"></i>
+                        <i class="fas fa-trash-alt"></i>
                     </button>
                 </div>
             </td>
@@ -40,11 +66,26 @@ export const renderTable = (tableBody) => {
     });
 };
 
+// Lấy chữ cái đầu từ tên
+const getInitials = (fullName) => {
+    return fullName.split(' ')
+        .map(word => word[0])
+        .join('')
+        .toUpperCase()
+        .slice(0, 2);
+};
+
 // Lưu dữ liệu ứng viên
 export const saveCandidate = (formData, currentEditId) => {
+    const avatarInitials = getInitials(formData.fullName);
+    const avatarColor = ['danger', 'info', 'success'][Math.floor(Math.random() * 3)];
+    
     const candidateData = {
         id: currentEditId || Date.now(),
-        ...formData
+        ...formData,
+        avatarInitials,
+        avatarColor,
+        socialNetworks: [], // Mặc định không có mạng xã hội
     };
 
     let candidates = getCandidatesFromStorage();
@@ -53,6 +94,9 @@ export const saveCandidate = (formData, currentEditId) => {
         // Chế độ Sửa
         const index = candidates.findIndex((c) => c.id === currentEditId);
         if (index !== -1) {
+            // Giữ lại các thông tin cũ không có trong form
+            candidateData.socialNetworks = candidates[index].socialNetworks || [];
+            candidateData.role = candidates[index].role;
             candidates[index] = candidateData;
             showToast("Cập nhật ứng viên thành công!");
         } else {

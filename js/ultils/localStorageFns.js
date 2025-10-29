@@ -4,11 +4,84 @@ export const STORAGE_KEYS = {
     SIDEBAR: 'sidebarCollapsed'
 };
 
+// Dữ liệu mẫu
+const sampleCandidates = [
+    {
+        id: 1,
+        fullName: "Tạ Long Khánh",
+        avatarInitials: "TK",
+        avatarColor: "danger",
+        role: "Nhân viên",
+        phone: "",
+        email: "trangthu.tester@gmail.com",
+        campaign: "",
+        position: "QC /Tester/Kiểm thử",
+        socialNetworks: ["facebook"]
+    },
+    {
+        id: 2,
+        fullName: "Lê Mạnh Hùng",
+        avatarInitials: "LH",
+        avatarColor: "info",
+        phone: "",
+        email: "",
+        campaign: "",
+        position: "",
+        socialNetworks: ["discord"]
+    },
+    {
+        id: 3,
+        fullName: "Lê Mạnh Hùng",
+        avatarInitials: "LH",
+        avatarColor: "info",
+        phone: "",
+        email: "",
+        campaign: "",
+        position: "",
+        socialNetworks: ["line"]
+    },
+    {
+        id: 4,
+        fullName: "Nguyễn Minh Phong",
+        avatarInitials: "NP",
+        avatarColor: "success",
+        role: "Nhân viên",
+        phone: "",
+        email: "dtthao.test02@gmail.com",
+        campaign: "",
+        position: "QC /Tester/Kiểm thử",
+        socialNetworks: ["facebook"]
+    },
+    {
+        id: 5,
+        fullName: "Lại Cẩm Linh",
+        avatarInitials: "LL",
+        avatarColor: "danger",
+        role: "Nhân viên",
+        phone: "0982 970 918",
+        email: "camlinh.lai27@gmail.com",
+        campaign: "",
+        position: "QC /Tester/Kiểm thử",
+        socialNetworks: ["discord"]
+    },
+    {
+        id: 6,
+        fullName: "Bùi Mỹ Uyên",
+        avatarInitials: "BU",
+        avatarColor: "info",
+        phone: "0331 256 963",
+        email: "uyenbt.work@gmail.com",
+        campaign: "",
+        position: "Nhân viên kinh doanh",
+        socialNetworks: ["discord", "facebook"]
+    }
+];
+
 // Lấy danh sách ứng viên từ localStorage
 export const getCandidatesFromStorage = () => {
     const candidates = localStorage.getItem(STORAGE_KEYS.CANDIDATES);
-    // Nếu có dữ liệu, chuyển từ chuỗi JSON về mảng. Nếu không, trả về mảng rỗng.
-    return candidates ? JSON.parse(candidates) : [];
+    // Nếu có dữ liệu, chuyển từ chuỗi JSON về mảng. Nếu không, trả về dữ liệu mẫu.
+    return candidates ? JSON.parse(candidates) : sampleCandidates;
 };
 
 // Lưu danh sách ứng viên vào localStorage

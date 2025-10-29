@@ -94,16 +94,63 @@ html {
 .table-toolbar {
   gap: 10px;
   margin-bottom: 10px;
+  padding: 12px;
+  background-color: #fff;
+  border-radius: 4px;
+  margin-bottom: 16px;
+    justify-content: flex-end;
 }
 
+.toolbar-left {
+  gap: 12px;
+  /* ensure filter block appears after toolbar-right when aligned to the right */
+  order: 2;
+}
+
+/* Place the right-side controls before the filter block so filters end up at the far right */
+.toolbar-right {
+  order: 1;
+  gap: 8px;
+}
+
+
 .search-box {
-  padding: 7px 12px;
-  border-radius: 6px;
-  border: 1px solid #ccc;
+  position: relative;
+  width: 300px;
+}
+
+.search-box input {
+  width: 100%;
+  padding: 8px 12px;
+  padding-left: 32px;
+  border-radius: 4px;
+  border: 1px solid #e0e0e0;
   outline: none;
-  width: 250px;
-  overflow-x: auto;
-  background-color: #fff;
+}
+
+.search-box i {
+  position: absolute;
+  left: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: #666;
+}
+
+.filter-btn, .refresh-btn, .export-btn, .settings-btn {
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 4px;
+  cursor: pointer;
+  color: #666;
+  border: 1px solid #e0e6ec;
+}
+
+.filter-btn:hover, .refresh-btn:hover, .export-btn:hover, .settings-btn:hover {
+  background-color: #f5f5f5;
+  color: #2680eb;
 }
 
 .table-container {
@@ -114,12 +161,16 @@ html {
 }
 .table-scoll-wrapper{
   overflow-x: auto;
+  overflow-y: auto; /* Thêm dòng này */
+  flex: 1; /* Thêm dòng này để lấp đầy không gian còn lại */
+
 }
 
 .candidate-table {
   width: 100%;
   border-collapse: collapse;
   font-size: 13px;
+  position: relative;
 }
 
 .candidate-table thead {
@@ -128,15 +179,164 @@ html {
 
 .candidate-table th,
 .candidate-table td {
-  padding: 10px 12px;
+  padding: 12px 16px;
   border-bottom: 1px solid #eee;
   text-align: left;
-  white-space: nowrap; /* Ngăn không cho chữ bị xuống dòng */
-  max-width: 150px;
+  white-space: nowrap;
+  max-width: 200px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  background-color: inherit;
 }
 
-.candidate-table tr:hover {
+.candidate-table th {
+  position: sticky;
+  top: 0;
+  z-index: 2;
+  background-color: #f8f9fa;
+  font-weight: 600;
+  color: #212529;
+}
+
+/* Cột checkbox và thao tác cố định */
+.sticky-left {
+  position: sticky;
+  left: 0;
+  z-index: 1;
+  background-color: inherit;
+}
+
+.sticky-right {
+  position: sticky;
+  right: 0;
+  z-index: 1;
+  background-color: inherit;
+}
+
+/* Đảm bảo background cho các cột cố định */
+.checkbox-column {
+  background-color: #fff;
+  border-right: 1px solid #eee;
+}
+
+.action-column {
+  background-color: #fff;
+  border-left: 1px solid #eee;
+  min-width: 100px; /* Đảm bảo đủ không gian cho các nút */
+}
+
+/* Style cho các nút trong cột thao tác */
+.action-buttons {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+}
+
+.action-buttons button {
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 16px;
+  padding: 4px 8px;
+  border-radius: 4px;
+  transition: all 0.2s;
+}
+
+.action-buttons button.edit {
+  color: #007bff;
+}
+
+.action-buttons button.edit:hover {
+  background-color: rgba(0, 123, 255, 0.1);
+}
+
+.action-buttons button.delete {
+  color: #dc3545;
+}
+
+.action-buttons button.delete:hover {
+  background-color: rgba(220, 53, 69, 0.1);
+}
+
+/* Đảm bảo các cột cố định có background khi hover */
+.candidate-table tr:hover td {
   background-color: #f4f6f8;
+}
+
+.candidate-table tr:hover .checkbox-column,
+.candidate-table tr:hover .action-column {
+  background-color: #f4f6f8;
+}
+
+.table-scoll-wrapper {
+  overflow-x: auto;
+  overflow-y: auto;
+  flex: 1;
+  position: relative; /* Cần thiết cho sticky columns */
+}
+
+.avatar {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background-color: #e9ecef;
+  color: #495057;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 600;
+}
+
+.avatar.bg-danger {
+  background-color: #ffd4d4;
+  color: #dc3545;
+}
+
+.avatar.bg-info {
+  background-color: #cce5ff;
+  color: #0d6efd;
+}
+
+.avatar.bg-success {
+  background-color: #d4edda;
+  color: #198754;
+}
+
+.social-icons {
+  position: absolute;
+  bottom: -2px;
+  right: -2px;
+  display: flex;
+  gap: 2px;
+}
+
+.social-icons i {
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 8px;
+  color: #fff;
+}
+
+.social-icons .fa-facebook-f {
+  background-color: #1877f2;
+}
+
+.social-icons .fa-line {
+  background-color: #00b900;
+}
+
+.social-icons .fa-discord {
+  background-color: #7289da;
+}
+
+.sub-text {
+  font-size: 12px;
+  color: #6c757d;
+  margin-top: 2px;
 }
 
 .candidate-table .highlight {
@@ -182,17 +382,55 @@ html {
 }
 
 .table-footer {
-  padding: 8px 12px;
+  padding: 12px 16px;
   background-color: #fff;
   font-size: 13px;
   border-top: 1px solid #eee;
+  border-radius: 0 0 4px 4px;
 }
 
-.table-footer select {
-  padding: 4px;
+.records-per-page {
+  gap: 8px;
+  margin-right: 24px;
+}
+
+.records-per-page select {
+  padding: 4px 8px;
   border-radius: 4px;
-  border: 1px solid #ccc;
-  margin: 0 5px;
+  border: 1px solid #e0e0e0;
+}
+
+.page-numbers {
+  margin: 0 16px;
+  color: #666;
+}
+
+.page-controls {
+  display: flex;
+  gap: 4px;
+}
+
+.page-controls button {
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid #e0e0e0;
+  background-color: #fff;
+  border-radius: 4px;
+  cursor: pointer;
+  color: #666;
+}
+
+.page-controls button:hover {
+  background-color: #f5f5f5;
+  color: #2680eb;
+}
+
+.page-controls button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
 }
 
 .header-left {
@@ -267,9 +505,7 @@ html {
 }
 
 .modal-header h3 {
-  margin: 0;
-  font-size: 18px;
-  font-weight: 600;
+  font-weight: 700;
 }
 
 .close-btn {
@@ -521,4 +757,75 @@ html {
 
 .text-center {
   text-align: center;
+}
+/* --- Styles for New Candidate Form --- */
+
+/* Make the modal body scrollable */
+.modal-body {
+  padding: 24px;
+  /* Set a max-height relative to the viewport height, subtracting header/footer height */
+  max-height: calc(85vh - 120px); 
+  overflow-y: auto;
+}
+
+/* Style for the avatar upload placeholder */
+.avatar-upload {
+  width: 100px;
+  height: 100px;
+  border: 2px dashed #ccc;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #999;
+  font-size: 14px;
+  cursor: pointer;
+}
+
+/* Ensure form groups in a row align correctly */
+.form-row .form-group {
+  display: flex;
+  flex-direction: column;
+}
+
+.form-group textarea {
+  padding: 8px 12px;
+  border: 1px solid #d9d9d9;
+  border-radius: 4px;
+  font-size: 13px;
+  outline: none;
+  font-family: inherit; /* Use the same font as other inputs */
+  resize: vertical; /* Allow vertical resizing */
+}
+
+.form-group textarea:focus {
+   border-color: #007bff;
+}
+
+/* Styling for input groups with a button (e.g., Education Level +) */
+.input-group {
+  margin-bottom: 16px;
+}
+
+.input-group label {
+  margin-bottom: 6px;
+  font-size: 13px;
+  color: #333;
+  display: block;
+}
+
+.input-group .d-flex input {
+    flex: 1;
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 0;
+}
+
+.input-group .add-item-btn {
+    padding: 8px 12px;
+    border: 1px solid #d9d9d9;
+    border-left: none;
+    background-color: #f8f9fa;
+    cursor: pointer;
+    border-top-right-radius: 4px;
+    border-bottom-right-radius: 4px;
 }
