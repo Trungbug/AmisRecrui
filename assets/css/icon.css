@@ -1,0 +1,69 @@
+.icon {
+  background-image: url("../icons/ICON.svg");
+  background-repeat: no-repeat;
+  background-color: transparent;
+  width: 20px;
+  height: 20px;
+}
+.icon-list {
+  background-position: -66px -1px;
+  width: 13px;
+  height: 14px;
+}
+.icon-logo {
+  background-position: -53px -411px;
+  width: 54px;
+  height: 54px;
+}
+.icon-world {
+  background-position: -113px 0;
+  width: 14px;
+  height: 16px;
+  display: flex;
+  align-items: center;
+}
+.icon-cart {
+  background-position: -22px -1266px;
+  width: 16px;
+  height: 16px;
+}
+.icon-chat {
+  background-position: -7px -1097px;
+  width: 34px;
+  height: 34px;
+}
+.icon-notification {
+  background-position: -2px -634px;
+  width: 20px;
+  height: 21px;
+}
+.icon-user {
+  background-position: -123px -139px;
+  width: 18px;
+  height: 18px;
+}
+.icon-candidate {
+  background-position: -26px -114px;
+  width: 20px;
+  height: 19px;
+}
+.icon-collape {
+  background-position: -200px -141px;
+  width: 8px;
+  height: 14px;
+}
+.icon-sb-talent {
+  -webkit-mask-image: url(https://amisplatform.misacdn.net/apps/recruit2/assets/images/ICON.svg);
+  -webkit-mask-position: 0px -112px;
+  -webkit-mask-repeat: no-repeat;
+  background-color: #c5ccd5;
+}
+.icon-recruitment-campaign-active {
+  width: 22px;
+  height: 22px;
+  min-width: 22px;
+  -webkit-mask-image: url(https://amisplatform.misacdn.net/apps/recruit2/assets/images/ICON.svg);
+  -webkit-mask-position: -73px -633px;
+  -webkit-mask-repeat: no-repeat;
+  background-color: #ffffff;
+}

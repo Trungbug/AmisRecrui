@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>AMIS Tuyển dụng</title>
+    <link rel="stylesheet" href="assets/css/common.css" />
+    <link rel="stylesheet" href="assets/css/style.css" />
+    <link rel="stylesheet" href="assets/css/icon.css" />
+
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"
+    />
+  </head>
+  <body>
+    <div class="container d-flex flex-direction-column">
+      <!-- Header -->
+      <div
+        class="header d-flex justify-content-space-between align-items-center"
+      >
+        <!-- left -->
+        <div class="header-left d-flex align-items-center">
+          <div class="icon icon-logo"></div>
+          <div class="title-name">TUYỂN DỤNG</div>
+          <div class="navbar-search">
+            <input
+              type="text"
+              placeholder="Tìm kiếm tin tuyển dụng, ứng viên, nhân tài..."
+            />
+          </div>
+        </div>
+        <!-- right -->
+        <div class="header-right d-flex align-items-center">
+          <div class="world-section d-flex align-items-center">
+            <div class="icon icon-world"></div>
+            <span>Website tuyển dụng</span>
+          </div>
+          <div class="icon icon-cart"></div>
+          <div class="icon icon-chat"></div>
+          <div class="icon icon-notification"></div>
+          <div class="icon icon-user"></div>
+        </div>
+      </div>
+      <!-- sidebar -->
+      <div class="content w-100 d-flex flex1">
+        <div class="sidebar h-100">
+          <div class="sidebar-item active">
+            <div class="icon icon-candidate"></div>
+            <div class="title">Ứng viên</div>
+          </div>
+
+          <div class="sidebar-item">
+            <i class="fa-solid fa-calendar"></i>
+            <div class="title">Lịch</div>
+          </div>
+
+          <div class="sidebar-item">
+            <div class="icon icon-sb-talent"></div>
+            <div class="title">Kho tiềm năng</div>
+          </div>
+
+          <div class="sidebar-item">
+            <div class="icon icon-list"></div>
+            <div class="title">Chiến dịch tuyển dụng</div>
+          </div>
+
+          <div class="sidebar-item">
+            <div class="icon-recruitment-campaign-active"></div>
+            <div class="title">Công việc</div>
+          </div>
+
+          <div class="bottom-area">
+            <div
+              class="collape-btn align-items-center d-flex"
+              id="collapseBtn"
+              title="Thu gọn sidebar"
+            >
+              <div class="icon icon-collape"></div>
+              <div class="title">Thu gọn</div>
+            </div>
+          </div>
+        </div>
+        <!-- main content -->
+        <div class="main-content h-100 flex1">
+          <div
+            class="content-header d-flex justify-content-space-between align-items-center"
+          >
+            <h2>Ứng viên</h2>
+            <button class="btn btn-primary" id="addCandidateBtn">
+              + Thêm ứng viên
+            </button>
+          </div>
+
+          <div
+            class="table-toolbar d-flex justify-content-flex-end align-items-center"
+          ></div>
+
+          <div class="table-scoll-wrapper">
+            <div class="table-container">
+              <table class="candidate-table">
+                <thead>
+                  <tr>
+                    <th><input type="checkbox" /></th>
+                    <th>Họ và tên</th>
+                    <th>Số điện thoại</th>
+                    <th>Email</th>
+                    <th>Chiến dịch tuyển dụng</th>
+                    <th>Vị trí tuyển dụng</th>
+                    <th>Tin tuyển dụng</th>
+                    <th>Vòng tuyển dụng</th>
+                    <th>Đánh giá</th>
+                    <th>Trình độ đào tạo</th>
+                    <th>Nơi làm việc gần nhất</th>
+                    <th>Người thu hút nhân sự</th>
+                    <th>Ngày ứng tuyển</th>
+                    <th>Người giới thiệu</th>
+                    <th>Kênh tuyển dụng</th>
+                    <th class="text-center">Thao tác</th>
+                  </tr>
+                </thead>
+                <tbody id="candidateTableBody"></tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- popup modal -->
+      <div class="modal-overlay" id="modalOverlay">
+        <div class="modal">
+          <div class="modal-header">
+            <h3 id="modalTitle">Thêm ứng viên</h3>
+            <button class="close-btn" id="closeModalBtn">×</button>
+          </div>
+          <div class="modal-body">
+            <form id="candidateForm">
+              <input type="hidden" id="candidateId" />
+              <div class="form-row">
+                <div class="form-group" style="flex: 1">
+                  <label>Họ và tên <span class="required">*</span></label>
+                  <input
+                    type="text"
+                    id="fullName"
+                    placeholder="Nhập họ và tên"
+                    required
+                  />
+                </div>
+              </div>
+              <div class="form-row">
+                <div class="form-group">
+                  <label>Số điện thoại</label>
+                  <input
+                    type="tel"
+                    id="phone"
+                    placeholder="Nhập số điện thoại"
+                  />
+                </div>
+                <div class="form-group">
+                  <label>Email</label>
+                  <input type="email" id="email" placeholder="Nhập Email" />
+                </div>
+              </div>
+              <div class="form-group">
+                <label>Vị trí ứng tuyển</label>
+                <input
+                  type="text"
+                  id="position"
+                  placeholder="Nhập vị trí ứng tuyển"
+                />
+              </div>
+            </form>
+          </div>
+          <div class="modal-footer">
+            <button class="btn btn-cancel" id="cancelBtn">Hủy</button>
+            <button class="btn btn-save" id="saveBtn">Lưu</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div id="toast"></div>
+  </body>
+  <script type="module" src="js/main.js"></script>
+</html>
