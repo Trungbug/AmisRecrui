@@ -688,8 +688,6 @@ html {
 .sidebar .bottom-area {
   position: absolute;
   bottom: 16px;
-  left: 12px;
-  right: 12px;
 }
 
 .collape-btn {
@@ -703,6 +701,8 @@ html {
 /* When collapsed, center the collapse icon */
 .sidebar.collapsed .collape-btn {
   justify-content: center;
+  padding-left: 0;
+  padding-right: 0;
 }
 
 /* --- Toast Notification Styles --- */
