@@ -1,8 +1,8 @@
 import { showToast, initializeSidebar } from './ultils/commonFns.js';
 import { renderTable, saveCandidate, deleteCandidate, getCandidateById } from './ultils/dataFns.js';
-import { saveSidebarState, getSidebarState } from './ultils/localStorageFns.js';
+import { saveSidebarState, getSidebarState, saveCandidatesToStorage } from './ultils/localStorageFns.js';
 
-document.addEventListener("DOMContentLoaded", () => {
+document.addEventListener("DOMContentLoaded", async () => {
     const elements = {
         modal: document.getElementById("modalOverlay"),
         modalTitle: document.getElementById("modalTitle"),
@@ -158,6 +158,50 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     }
 
-    // Khởi tạo ban đầu
+    // Khởi tạo ban đầu: nếu localStorage chưa có candidates thì load từ file mẫu
+    const initCandidates = async () => {
+        try {
+            if (!localStorage.getItem('candidates')) {
+                const res = await fetch('common/models/candidate-data.json');
+                if (res.ok) {
+                    const data = await res.json();
+                    const raw = Array.isArray(data) ? data : (data.Data || []);
+                    if (raw && raw.length) {
+                        // Chuẩn hoá dữ liệu từ API về cấu trúc mong đợi bởi ứng dụng
+                        const normalized = raw.map(item => ({
+                            id: item.RecruitmentID || Date.now(),
+                            fullName: item.TitleWebsite || item.Title || item.CreatedBy || '--',
+                            dob: item.DOB || "",
+                            gender: item.Gender || "",
+                            area: item.Area || "",
+                            phone: item.ContactPhone || "",
+                            email: item.ContactEmail || "",
+                            address: item.Address || "",
+                            education: item.Education || "",
+                            educationPlace: item.EducationPlace || "",
+                            recentWorkplace: item.RecentWorkplace || "",
+                            workplace: item.Workplace || "",
+                            startTime: item.StartTime || "",
+                            endTime: item.EndTime || "",
+                            position: item.JobPositionName || item.Position || "",
+                            jobDescription: item.Description || "",
+                            campaign: item.Title || item.TitleWebsite || "",
+                            avatarInitials: (item.CreatedBy || item.Title || '--').toString().split(' ').map(w => w[0]).join('').toUpperCase().slice(0,2),
+                            avatarColor: ['danger', 'info', 'success'][Math.floor(Math.random() * 3)],
+                            socialNetworks: []
+                        }));
+                        saveCandidatesToStorage(normalized);
+                    }
+                } else {
+                    console.warn('Không thể load candidate-data.json:', res.status);
+                }
+            }
+        } catch (err) {
+            console.error('Lỗi khi load dữ liệu ứng viên mặc định:', err);
+        }
+    };
+
+    await initCandidates();
+    // Hiển thị bảng
     renderTable(elements.tableBody);
 });
